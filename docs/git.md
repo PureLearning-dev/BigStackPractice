@@ -28,6 +28,16 @@ develop -> main ：已经发布上线，线上验收完成。
 
 hotfix-a -> main ：已经发布上线，线上验收完成。
 
+## git 提交规范
+
+- feat：新功能
+- fix：修补 bug
+- docs：文档
+- style：格式
+- refactor：重构
+- test：增加测试
+- chore：构建过程或辅助工具的变动
+
 ## 常用命令
 
 git branch 查看本地拥有的分支和现在所处的分支。
