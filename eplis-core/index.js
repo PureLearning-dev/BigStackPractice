@@ -51,25 +51,31 @@ module.exports = {
 }
 
 function loadingLoader(app) {
-    // 加载 config
-    configLoader(app);
-    console.log(`-- [start] load config done --`);
-    // 加载 controller
-    controllerLoader(app);
-    console.log(`-- [start] load controller done --`);
-    // 加载 extend
-    extendLoader(app);
-    console.log(`-- [start] load extend done --`);
-    // 加载 middleware
+    // 1. 加载 middleware
     middlewareLoader(app);
     console.log(`-- [start] load middleware done --`);
-    // 加载 routerSchema
+
+    // 2. 加载 routerSchema
     routerSchemaLoader(app);
     console.log(`-- [start] load router-schema done --`);
-    // 加载 service
+
+    // 3. 加载 controller
+    controllerLoader(app);
+    console.log(`-- [start] load controller done --`);
+
+    // 4. 加载 service
     serviceLoader(app);
     console.log(`-- [start] load service done --`);
-    // 注册路由
+
+    // 5. 加载 config
+    configLoader(app);
+    console.log(`-- [start] load config done --`);
+
+    // 6. 加载 extend
+    extendLoader(app);
+    console.log(`-- [start] load extend done --`);
+
+    // 7. 注册路由
     routerLoader(app);
     console.log(`-- [start] load router done --`);
 }
