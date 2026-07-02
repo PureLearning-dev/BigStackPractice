@@ -6,7 +6,7 @@ const { sep } = path;
  * middleware loader
  * @param {object} app Koa 实例
  *
- * 加载所有 middleware，可通过 'app.middlewares.${文件}` 访问
+ * 加载所有 middleware，可通过 'app.middlewares.${目录}.${文件}` 访问
  *
  * 例子：
  * app/middlewares
@@ -14,7 +14,7 @@ const { sep } = path;
  *   | -- custom-module
  *          |
  *          | -- custom-middleware.js
- * => 可通过 app.middlewares.custom-module.customMiddleware 进行访问
+ * => 可通过 app.middlewares.customModule.customMiddleware 进行访问
  * */
 module.exports = (app) => {
     // 读取 app/middlewares/**/**.js
