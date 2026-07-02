@@ -52,8 +52,9 @@ module.exports = (app) => {
         for (let i = 0, l = names.length; i < l; i++) {
             // 此时为最终的文件，否则为目录
             if (i === l - 1) {
-                //
-                tempMiddleware[names[i]] = require(filePath)(app);
+                // app/controller/**.js 中返回一个 class
+                const controllerModule = require(filePath)(app);
+                tempMiddleware[names[i]] = new controllerModule();
             } else {
                 if (!tempMiddleware[names[i]]) {
                     tempMiddleware[names[i]] = {};
