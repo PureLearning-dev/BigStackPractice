@@ -51,7 +51,8 @@ module.exports = (app) => {
         for (let i = 0, l = names.length; i < l; i++) {
             // 此时为最终的文件，否则为目录
             if (i === l - 1) {
-                //
+                // 配置 filePath 下的中间件
+                // app/middlewares/**.js 中返回一个函数
                 tempMiddleware[names[i]] = require(filePath)(app);
             } else {
                 if (!tempMiddleware[names[i]]) {
