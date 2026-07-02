@@ -4,6 +4,16 @@ const env = require('./env');
 // 兼容不同 OS 中的斜杠
 const { sep } = path;
 
+// 引入 Loader
+const configLoader = require('./loader/config');
+const controllerLoader = require('./loader/controller');
+const extendLoader = require('./loader/extend');
+const middlewareLoader = require('./loader/middleware');
+const routerLoader = require('./loader/router');
+const routerSchemaLoader = require('./loader/router-schema');
+const serviceLoader = require('./loader/service');
+
+// 核心引擎，将项目的配置完成并提供核心功能
 module.exports = {
     /**
      * 启动项目
@@ -20,9 +30,13 @@ module.exports = {
         // 项目环境配置
         app.env = env();
 
-        console.log(`项目 baseDir = ${app.baseDir}，项目 businessPath = ${app.businessPath}`);
+        // 加载 loader
+        loadingLoader(app);
 
-        console.log(`项目环境 = ${app.env.getCurrentEnvironment()}`);
+        console.log(`-- [start] baseDir: ${app.baseDir} --`);
+        console.log(`-- [start] businessPath: ${app.businessPath} --`);
+
+        console.log(`-- [start] env: ${app.env.getCurrentEnvironment()} --`);
 
         try {
             const port = process.env.PORT || 8080;
@@ -34,4 +48,28 @@ module.exports = {
             console.error(error);
         }
     }
+}
+
+function loadingLoader(app) {
+    // 加载 config
+    configLoader(app);
+    console.log(`-- [start] load config done --`);
+    // 加载 controller
+    controllerLoader(app);
+    console.log(`-- [start] load controller done --`);
+    // 加载 extend
+    extendLoader(app);
+    console.log(`-- [start] load extend done --`);
+    // 加载 middleware
+    middlewareLoader(app);
+    console.log(`-- [start] load middleware done --`);
+    // 加载 routerSchema
+    routerSchemaLoader(app);
+    console.log(`-- [start] load router-schema done --`);
+    // 加载 service
+    serviceLoader(app);
+    console.log(`-- [start] load service done --`);
+    // 注册路由
+    routerLoader(app);
+    console.log(`-- [start] load router done --`);
 }
