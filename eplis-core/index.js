@@ -79,7 +79,16 @@ function loadingLoader(app) {
     extendLoader(app);
     console.log(`-- [start] load extend done --`);
 
-    // 7. 注册路由
+    // 7. 加载全局中间件
+    try {
+        // 在 middleware 中使用 app.use 进行中间件的挂载
+        require(path.resolve(app.businessPath, `.${sep}middleware.js`))(app);
+        console.log(`-- [start] load global middleware done --`);
+    } catch (e) {
+        console.error(`[exception] there is no middleware file`);
+    }
+
+    // 8. 注册路由
     routerLoader(app);
     console.log(`-- [start] load router done --`);
 }
