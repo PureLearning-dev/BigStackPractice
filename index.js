@@ -18,5 +18,6 @@ const ElpisCore = require("./eplis-core");
 // 启动项目
 ElpisCore.start({
     name: "ElpisCore",
+    homePage: 'blog'
 });
 
