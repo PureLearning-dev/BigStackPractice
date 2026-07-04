@@ -82,10 +82,11 @@ function loadingLoader(app) {
     // 7. 加载全局中间件
     try {
         // 在 middleware 中使用 app.use 进行中间件的挂载
+        // 如果 middleware.js 中没有函数，这里就会抛出错误，从而导致执行 catch 中的逻辑
         require(path.resolve(app.businessPath, `.${sep}middleware.js`))(app);
         console.log(`-- [start] load global middleware done --`);
     } catch (e) {
-        console.error(`[exception] there is no middleware file`);
+        console.error(`[exception] there is no global middleware file`);
     }
 
     // 8. 注册路由
