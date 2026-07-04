@@ -16,25 +16,25 @@ const { sep} = path
  * */
 module.exports = (app) => {
     // 找到 config/ 目录
-    const configPath = path.resolve(app.baseDir, `${sep}config`);
+    const configPath = path.resolve(app.baseDir, `.${sep}config`);
 
     let defaultConfig = {};
     // 获取 default.config
     try {
-        defaultConfig = require(path.resolve(configPath, `${sep}config.default.js`));
+        defaultConfig = require(path.resolve(configPath, `.${sep}config.default.js`));
     } catch (e) {
-        console.error(`[exception] there is no default.config file`);
+        console.error(`[exception] there is no config.default file`);
     }
 
     // 获取 env.config
     let envConfig = {};
     try {
         if (app.env.isLocal()) { // 本地环境
-            envConfig = require(path.resolve(configPath, `${sep}config.local.js`));
+            envConfig = require(path.resolve(configPath, `.${sep}config.local.js`));
         } else if (app.env.isBeta()) { // 测试环境
-            envConfig = require(path.resolve(configPath, `${sep}config.beta.js`));
+            envConfig = require(path.resolve(configPath, `.${sep}config.beta.js`));
         } else if (app.env.isProduction()) { // 生产环境
-            envConfig = require(path.resolve(configPath, `${sep}config.prod.js`));
+            envConfig = require(path.resolve(configPath, `.${sep}config.prod.js`));
         }
     } catch (e) {
         console.error(`[exception] there is no env file`);
